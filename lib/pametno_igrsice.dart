@@ -83,22 +83,41 @@ class _PametnoIgrisceAppState extends State<PametnoIgrisceApp> {
       color: Colors.purple[400],
       home: Scaffold(
         appBar: AppBar(
-          title: Text('PametnoIgrisce'),
-          backgroundColor: Colors.orange,
+          title: Text('Igrišče Rožna Dolina'),
+          centerTitle: true,
+          backgroundColor: Color.fromARGB(255, 127, 255, 249),
         ),
         body:
           Column(
             children: [
               Center(
-                child: Text(
-                  currentActivity
-                ),
+                child: Container(
+                  child: Text(
+                    'Trenutno stanje na igrišču:',
+                  ),
+                  margin: EdgeInsets.all(30),
+                )
               ),
               Center(
-                child: Image(
-                  image: AssetImage(currentActivityImg)
-                ),
-              )
+                child: Container(
+                  child: Image(
+                    image: AssetImage(currentActivityImg)
+                  ),
+                  margin: EdgeInsets.all(20),
+                )
+              ),
+              Center(
+                child: Container(
+                  child: Text(
+                    currentActivity,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 25
+                    ),
+                  ),
+                  margin: EdgeInsets.all(30),
+                )
+              ),
             ],
           )
           
