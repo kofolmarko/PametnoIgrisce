@@ -12,7 +12,7 @@ class PametnoIgrisceApp extends StatefulWidget {
 }
 
 class _PametnoIgrisceAppState extends State<PametnoIgrisceApp> {
-  String currentActivity = 'Invalid information';
+  String currentActivity = 'Nalaganje...';
   String currentActivityImg = 'assets/night.png';
 
   void subscribeToService() async {
@@ -22,14 +22,14 @@ class _PametnoIgrisceAppState extends State<PametnoIgrisceApp> {
 
     await flutterBlue.scanResults.listen((resultsList) {
       setState(() {
-        currentActivity = 'Scanning for devices...';  
+        currentActivity = 'Iščem naprave...';  
       });
       
       resultsList.forEach((r) async {
         print(r.device.name);
         if (r.device.name == deviceName) {
           setState(() {
-            currentActivity = 'Device found: ' + r.device.name;
+            currentActivity = 'Najdena naprava: ' + r.device.name;
           });
 
           _device = r.device;
@@ -41,11 +41,11 @@ class _PametnoIgrisceAppState extends State<PametnoIgrisceApp> {
 
     if (_device != null) {
       setState(() {
-        currentActivity = 'Connecting to device: ' + deviceName;
+        currentActivity = 'Povezujem se z napravo: ' + deviceName;
       });
       
       await _device?.connect();
-      currentActivity = 'Searching for services...';
+      currentActivity = 'Iščem storitve...';
       List<BluetoothService>? services = await _device?.discoverServices();
       services?.forEach((service) async {
         String serviceUuid = service.uuid.toString();
@@ -53,7 +53,7 @@ class _PametnoIgrisceAppState extends State<PametnoIgrisceApp> {
             var characteristics = service.characteristics;
             for(BluetoothCharacteristic c in characteristics) {
               setState(() {
-                currentActivity = 'Searching for characteristics...';
+                currentActivity = 'Iščem karakteristike...';
               });
               
               if (c.uuid.toString() == charId) {
@@ -83,9 +83,9 @@ class _PametnoIgrisceAppState extends State<PametnoIgrisceApp> {
       color: Colors.purple[400],
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Igrišče Rožna Dolina'),
+          title: Text('Pametno Igrišče'),
           centerTitle: true,
-          backgroundColor: Color.fromARGB(255, 127, 255, 249),
+          backgroundColor: Color.fromARGB(255, 255, 166, 41),
         ),
         body:
           Column(
@@ -94,6 +94,9 @@ class _PametnoIgrisceAppState extends State<PametnoIgrisceApp> {
                 child: Container(
                   child: Text(
                     'Trenutno stanje na igrišču:',
+                      style: TextStyle(
+                      fontSize: 20
+                    ),
                   ),
                   margin: EdgeInsets.all(30),
                 )
@@ -112,39 +115,39 @@ class _PametnoIgrisceAppState extends State<PametnoIgrisceApp> {
                     currentActivity,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 25
+                      fontSize: 35
                     ),
                   ),
                   margin: EdgeInsets.all(30),
                 )
               ),
-              Center(
-                child: Row(
-                  children: [
-                    Container(
-                      height: 100,
-                      width: 100,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: Colors.amber
-                      ),
-                      margin: EdgeInsets.all(30),
-                      child: Text('Vreme'),
-                    ),
-                    Spacer(),
-                    Container(
-                      height: 100,
-                      width: 100,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: Colors.blue,
-                      ),
-                      margin: EdgeInsets.all(30),
-                      child: Text('Lokacija'),
-                    )
-                  ],
-                ),
-              )
+              // Center(
+              //   child: Row(
+              //     children: [
+              //       Container(
+              //         height: 100,
+              //         width: 100,
+              //         decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.all(Radius.circular(10)),
+              //           color: Colors.amber
+              //         ),
+              //         margin: EdgeInsets.all(30),
+              //         child: Text('Vreme'),
+              //       ),
+              //       Spacer(),
+              //       Container(
+              //         height: 100,
+              //         width: 100,
+              //         decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.all(Radius.circular(10)),
+              //           color: Colors.blue,
+              //         ),
+              //         margin: EdgeInsets.all(30),
+              //         child: Text('Lokacija'),
+              //       )
+              //     ],
+              //   ),
+              // )
             ],
           )
           
@@ -154,12 +157,12 @@ class _PametnoIgrisceAppState extends State<PametnoIgrisceApp> {
   
   String getActivity(int state) {
     switch (state) {
-      case 0: return 'Basketball';
-      case 1: return 'Football';
-      case 2: return 'Breaking bottles';
-      case 3: return 'Talking';
-      case 4: return 'No activity';
-      default: return 'Invalid data';
+      case 0: return 'Košarka';
+      case 1: return 'Nogomet';
+      case 2: return 'Možnost vandalizma';
+      case 3: return 'Pogovor';
+      case 4: return 'Brez aktivnosti';
+      default: return 'Napaka v sistemu';
     }
   }
   
