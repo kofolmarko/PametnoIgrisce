@@ -118,6 +118,33 @@ class _PametnoIgrisceAppState extends State<PametnoIgrisceApp> {
                   margin: EdgeInsets.all(30),
                 )
               ),
+              Center(
+                child: Row(
+                  children: [
+                    Container(
+                      height: 100,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Colors.amber
+                      ),
+                      margin: EdgeInsets.all(30),
+                      child: Text('Vreme'),
+                    ),
+                    Spacer(),
+                    Container(
+                      height: 100,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Colors.blue,
+                      ),
+                      margin: EdgeInsets.all(30),
+                      child: Text('Lokacija'),
+                    )
+                  ],
+                ),
+              )
             ],
           )
           
